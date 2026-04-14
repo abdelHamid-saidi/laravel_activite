@@ -22,4 +22,3 @@ class SettingsSeeder extends Seeder
         ]);
     }
 }
-$user->settings()->create(['theme' => 'dark',    'lang'  => 'en']);
