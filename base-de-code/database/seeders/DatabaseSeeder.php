@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,12 +18,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // créer rôle
+        $adminRole = Role::create(['name' => 'admin']);
+
+        // créer permission
+        $permission = Permission::create(['name' => 'view dashboard']);
+
+        // assigner permission au rôle
+        $adminRole->givePermissionTo($permission);
+
         // Utilisateur "admin"
         $admin = User::factory()->create([
             'name'     => 'Admin',
             'email'    => 'admin@example.com',
             'password' => bcrypt('password'),
         ]);
+
+        // assigner rôle
+        $admin->assignRole($adminRole);
 
         // Utilisateur "user"
         $user = User::factory()->create([
