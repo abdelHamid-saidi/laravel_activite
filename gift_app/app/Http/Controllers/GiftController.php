@@ -21,10 +21,10 @@ class GiftController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|min:3|max:50',
-            'url' => 'nullable|url|regex:/^https?:\/\//',
-            'details' => 'nullable|string',
-            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/'
+            "name" => "required|string|min:3|max:50",
+            "url" => "nullable|url:http,https",
+            "details" => "nullable|string",
+            "price" => "required|decimal:0,2"
         ]);
 
         Gift::create($data);
@@ -51,10 +51,10 @@ class GiftController extends Controller
         $gift = Gift::findOrFail($id);
 
         $data = $request->validate([
-            'name' => 'required|string|min:3|max:50',
-            'url' => 'nullable|url|regex:/^https?:\/\//',
-            'details' => 'nullable|string',
-            'price' => 'required|numeric|regex:/^\d+(\.\d{1,2})?$/'
+            "name" => "required|string|min:3|max:50",
+            "url" => "nullable|url:http,https",
+            "details" => "nullable|string",
+            "price" => "required|decimal:0,2"
         ]);
 
         $gift->update($data);
